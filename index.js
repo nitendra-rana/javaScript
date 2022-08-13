@@ -30,12 +30,11 @@ let fun= () => {
 fun();
 */
 
-// openion --> never ever use arrow functions as method {object};
+// opinion --> never ever use arrow functions as method {object};
 
 // annoyomous function  as method
 
-
-//solution 1 to solve problem of this keyword 
+//solution 1 to solve problem of this keyword
 
 /*
 const obj = {
@@ -70,7 +69,7 @@ const obj = {
 obj.fun();
 
 */
-//argumentx keyword only exits in regular functions
+//arguments keyword only exits in regular functions
 /*
 const numArgu = {
     fun: function(a, b) {
@@ -80,8 +79,7 @@ console.log(arguments);
 numArgu.fun(1, 2);
 */
 
-
-
+//+++=====================================================================  ============================================
 //--------------------------------------------------------------------------------------------------------------------------------
 
 //DataStructues in Js
@@ -145,7 +143,7 @@ const {menu = [], fName: Name = "1"} = obj1; // if the property do not exist in 
 console.log(menu, Name);
 */
 
-//Mutating Variables 
+//Mutating Variables
 /*
 let a = 10;
 let b= 20;
@@ -157,7 +155,7 @@ console.log(a, b);
 
 */
 
-//Nested objects destructuring 
+//Nested objects destructuring
 /*
 const obj2 = {a: 1, b: 2, c: { d:12, e:15}};
 let { c: {d, e} } = obj2
@@ -186,7 +184,7 @@ console.log(b);  // [ 1, 2, 3, 4, 5, 6 ]
 console.log(...b);  // 1 2 3 4 5 6
 */
 
-//object 
+//object
 
 /*
 let obj1 = {
@@ -205,7 +203,6 @@ console.log(...obj2); // Error: Found non-callable @@iterator
 //================================================================================================================
 //REST(...left) = Spread(...right)
 //================================================================================================================================================
-
 
 // REST pattern => collects all the elements which remain unused during assignment. and it should be the last during assignment
 // rest helps in making functions wich ca take any no of parameter.
@@ -229,7 +226,7 @@ function add(a, b, ...others){
 }
 add(1,2,3,4,5,6,7);
 */
-//========================  =========================================================================== ========    
+//========================  =========================================================================== ========
 // short circuting (short circuit evaluation)
 //boolean operator can USE any data type, RETURN any data type and do S-C
 
@@ -245,17 +242,15 @@ console.log(0||null||undefined||'name'||3);     //name    -->this is called chai
 problem: is when we have to take o as a value somewhere.
 */
 
-
 //////// AND (&&) short circuting will return first apperaring falsy value else last truly value
-//====> replacement of if statement 
+//====> replacement of if statement
 /*
 console.log(3 && 'name');                        //name
 console.log(null && 3);                          //null
 console.log(undefined && null);                  //undefined ---> it returns second value even it is truly.
 console.log(0 && "name");                        //0
 console.log('name'&& 3 && 4 && "this" && null); // null ==> first appearance of falsy values
-*/  
-
+*/
 
 //NULLSHING COLLASING operator  (??)  [NULLISH vaues are NULL and Undefined {do not include 0 and ''(empty string)}]
 //==== works on the idea of nullish value not falsy value.
@@ -265,7 +260,7 @@ console.log(null ??0); // will return 0
 console.log(0 ??null); // will return 0 -- 0 is not a nullish value
 */
 
-//logical assignement operator 
+//logical assignement operator
 /*
 let a =20;
 let b =40;
@@ -288,7 +283,7 @@ for(const num of arr.entries()) console.log(num); // return array with index and
 for(const [index, value] of arr.entries()) console.log(`${index} with ${value}`)
 */
 
-//Enhanced object literals 
+//Enhanced object literals
 /*
 let obj1 = {
     "key1":1,
@@ -306,4 +301,144 @@ let obj = {
 }
 
 console.log(obj);
+*/
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+//Option Chaining
+/*
+const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+
+const openOn = {
+  0: "10:00 AM",
+  2: "10:00 AM",
+  3: "10:00 AM",
+  5: "10:00 AM",
+  6: "10:00 AM",
+  Fun(a, b) {
+    console.log(a, b);
+    return null; //even it exist but returns null --> will print  nothing
+  },
+};
+for (const [index, day] of days.entries()) {
+  //console.log(openOn?.[index] ?? "closed"); // if open exist then we will see that day is defined or not
+}
+openOn.Fun?.(2, 3) ?? console.log("does not exist"); /// == if not null/undefined => it ill print some value
+
+*/
+// optional chaining for arrays 
+/*
+let arr = [1,2, 3, 0, {
+    name: "hello"
+}];
+
+console.log(arr[4]?.name ?? "item do not exist"); // for arr[3] it will print the message ""
+*/
+
+// without optional chaining same code will be 
+/*
+let arr = [1,2, 3, 0, {
+    name: "hello"
+}];
+if(arr.length>=4){
+    console.log(arr[4].name)
+}else{
+    console.log("item do not exist")
+}
+*/
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//LOOPING OVER OBJECTS 
+/*
+const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+
+const openOn = {
+  [days[0]]: "10:00 AM",
+  [days[2]]: "11:00 AM",
+  [days[3]]: "12:00 AM",
+  [days[5]]: "09:00 AM",
+  [days[6]]: "08:00 AM",
+}
+let str = `we are open on `
+ for (const day of Object.keys(openOn)){       /////=>  Object.keys(openOn)
+    str+= `${day},`
+ }
+ for (const time of Object.values(openOn)){       /////=>  Object.values(openOn)
+    str+= `${time},`
+ }
+ console.log(str);
+
+ const entries = Object.entries(openOn);
+ console.log(entries);
+ for(const ent in entries){
+    console.log(ent);   // 0,1,2,3,4  index like data for objects
+ }
+ */
+
+
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////    //////////////////////////////////////  ////    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ //SETS
+ //=> to get unique values out we use,
+ /*
+const arr = [1,2,3,3,3,6]
+ const set1 = new Set("string");
+ console.log(set1);
+ const set2 = [...new Set(arr)]; //==> array to set and back to array;  // set2 is not a set
+ console.log(set2, set1.size, set1.has(1),  );
+//  set1.clear()
+//  set1.delete(1)
+//  set1.add(5)
+for(const elem of set1) console.log(elem); // set sets are itterable 
+*/
+
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//      MAP
+/*
+const map1 = new Map();
+
+                          // set will add new value and return the map that is chainaing is possible
+map1.set("fname", "Nik").set('lname', 'Rana').set(true, "online").set(10,'will leave');
+console.log(map1.get(10)); // get will return the value of the key  "data type of key matters"
+
+console.log(
+map1.delete(true),
+map1.has(10),
+map1.size
+);
+
+//arrays as key 
+
+let arr = [1,2]             //It will not work if we tries this
+map1.set(arr, "this");      //map1.set([1,2], "this")
+console.log(map1.get(arr)); //map1.get([1,2])    ==> bcqz they are not same array in heap
+
+//map itteration 
+for(const [key, value] of map1) console.log(key, value);
+
+*/ 
+
+//?????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+                        //STRINGS//
+/*                        
+let str = "stringify...";
+console.log(
+    str[3], 
+    str.length, 
+    str.indexOf("r"), 
+    str.lastIndexOf("i"), 
+    str.slice(3),
+    str.slice(-2),
+    str.slice(-2, -4),
+    str.toUpperCase(),
+    str.toLowerCase(),
+    str.replace('i','j'),
+    str.split('i'),
+    ["this ", str].join('+'),
+    str.padStart(15,'+'),
+    str.padEnd(15, '+'),
+    str.repeat(3),
+    );
 */
