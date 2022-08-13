@@ -229,3 +229,81 @@ function add(a, b, ...others){
 }
 add(1,2,3,4,5,6,7);
 */
+//========================  =========================================================================== ========    
+// short circuting (short circuit evaluation)
+//boolean operator can USE any data type, RETURN any data type and do S-C
+
+////////// OR (||) short-circuting will return first apperaring truthy value else last falsy value*
+///==> replacement of terniory operatior
+/*
+console.log(3|| 'name');                        //3
+console.log(null|| 3);                          //3
+console.log(undefined|| null);                  //null ---> it returns second value even it is falsy.
+console.log(0|| "name");                        //name
+console.log(0||null||undefined||'name'||3);     //name    -->this is called chain shortcircuting
+
+problem: is when we have to take o as a value somewhere.
+*/
+
+
+//////// AND (&&) short circuting will return first apperaring falsy value else last truly value
+//====> replacement of if statement 
+/*
+console.log(3 && 'name');                        //name
+console.log(null && 3);                          //null
+console.log(undefined && null);                  //undefined ---> it returns second value even it is truly.
+console.log(0 && "name");                        //0
+console.log('name'&& 3 && 4 && "this" && null); // null ==> first appearance of falsy values
+*/  
+
+
+//NULLSHING COLLASING operator  (??)  [NULLISH vaues are NULL and Undefined {do not include 0 and ''(empty string)}]
+//==== works on the idea of nullish value not falsy value.
+
+/*
+console.log(null ??0); // will return 0
+console.log(0 ??null); // will return 0 -- 0 is not a nullish value
+*/
+
+//logical assignement operator 
+/*
+let a =20;
+let b =40;
+let c = 0;
+a ||= 10;  // or 
+b &&= null;
+c ??= null;
+console.log(a, b, c);  // 20 null 0
+*/
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// FOR of LOOP
+/*
+let arr = [1,2,3,4,5,6,7,8,9,10,11];
+
+for(const num of arr) console.log(num);
+// to find index of 
+for(const num of arr.entries()) console.log(num); // return array with index and value
+// so to print seprately destructure the array 
+for(const [index, value] of arr.entries()) console.log(`${index} with ${value}`)
+*/
+
+//Enhanced object literals 
+/*
+let obj1 = {
+    "key1":1,
+    "key2":2, 
+    "key3":3
+}
+let alph =  ['a','b','c']
+let obj = {
+    [alph[2]]:1,                            // key can be evaluated inside square brackets[];
+    obj1,                                   // not necessery to give name to an object if copying from somewhere
+    fun(){                                  // not needed key for the functions
+        console.log("this is a function");
+        console.log(this);                  // here this points to obj itself.
+    }
+}
+
+console.log(obj);
+*/
