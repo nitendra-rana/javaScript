@@ -21,7 +21,7 @@ function simpleFun(){
 simpleFun();
 */
 
-//(3) arrow function will give out lexixal environment
+//(3) arrow function will give out lexical environment
 //works difeerently for node and browsers.
 /*
 let fun= () => {
@@ -84,7 +84,7 @@ numArgu.fun(1, 2);
 
 //DataStructues in Js
 
-// 1) array destructuing, skipping some non-esseintial values;
+// 1) array destructuing, skipping some non-essential values;
 
 /*
 let arr = [1, 2, 3];
@@ -116,7 +116,7 @@ let {fName, lName, age} = obj1;
 
 console.log(`${fName} ${lName}, Your age is ${age}`)
 */
-// variable with differt name than properties can be used as following:
+// variable with differnt name than properties can be used as following:
 //property: newVarName
 /*
 const obj1 = {
@@ -442,3 +442,244 @@ console.log(
     str.repeat(3),
     );
 */
+
+
+//================================FUNCTIONS IN DETAIL============================================//
+
+//=>1 DEFAULT PARAMETERS
+
+/*
+function defPam(a, b=7, c=10) /// here b and c are default parameters, c can be used a c= b*2 .. but b = c*2 is not possible
+{   
+    console.log(a*b+c);
+}
+
+defPam(1);          //1*7+10 =17
+defPam(1,2);        //1*2+10 =12
+defPam(1,2,3);      //1*2+3 = 5
+*/
+
+//=> PARAMETERS { VALUE VS REFRENCE} ==> js dosen't use pass by refrence
+
+/*
+const obj1 = {
+    a:1, b: 2, c:3
+}
+let k= 10;
+function passingParms(value, ref){       //obj1 refrence is here and value is copied 
+    value =100
+    ref.a =20;
+    console.log(value, ref);            //100 { a: 20, b: 2, c: 3 } ==> a updated here
+}
+passingParms(k,obj1);
+console.log(k, obj1);                   //10 { a: 20, b: 2, c: 3 } ===> a is updated here also
+*/
+
+//==> FIRST CLASS FUNCTIONS + HIGHER OREDER fUNCTIONS (first class citizens)
+
+//FIRST CLASS FUNCTIONS  |==> functions are treated as values, passed as objects, returned back by functions
+//(first class is a feature. of js, other programming language may have or not i.e, the function can be stored as values)
+/*
+const value = function(){
+    console.log("First class function");
+}
+//HIGHER ORDER FUNCTIONS TAKES FUNCTION AS ARGUMENTS AND CAN RETURN FUNCTIONS.
+
+function fun1(passFunc){            // HIGHER ORER FUNCTION PASSING FIRST CLASS FUNCTION AS PARAMETER
+    return function(passFunc){      //HIGHER ORER FUNCTION RETURNING FIRST CLASS FUNCTION.
+        return passFunc; 
+    }
+   
+}
+
+fun1(value());
+*/
+
+//////Q.)reverse the string////////////
+/*
+let str = "hello this is working";
+const str2 =str.split(' ');
+console.log(str2);
+let str3 ='';
+for(let i = str2.length-1; i>=0; i--){
+    str3+= str2[i]+ " " ;
+}
+console.log(str3)
+
+*/
+
+//CALLBACK FUNCTIONS => functions we do not call by ourselves, instead we tell another function to call them later
+// callbacks are used in JavaScript all the time
+/*
+const reverse = function(str){
+    let str1 = str.split(" ");
+    str1 = str1.reverse();
+    return str1.join(" ");
+}
+function transform (str, func){  // here func(reverse) is a callback function and transform is a H.O.F.
+    console.log(func.name)
+    return func(str);
+}
+
+const print = transform("javaScript is fun to learn", reverse);
+console.log(print);
+*/
+
+//=> FUNCTION RETURNING FUNCTIONS
+/*
+const greeting = function(str){
+    return str;
+}
+const returnFunc = function(greet){
+    return(
+        function(name){
+        console.log((` ${greet} ${name}`))
+    });
+}
+*/ 
+//now using arrow function
+/*
+const greeting = str => str;
+
+const returnFunc = greet => name => console.log((` ${greet} ${name}`))
+
+returnFunc("hello");              //Nothing will be in output
+returnFunc("hello")("reu");     //hello reu                             
+const greetfunc =  returnFunc("hello");
+greetfunc("Nik");               // here we will get output as -> hello Nik   ====This works because of closures===
+*/
+
+//=> CALL METHOD     : works if we have to open another branch and use same team for functioning, Team must know whom they are working for
+/*
+let obj1 = {
+    func: "first",
+    storeNum: [],
+    addElem(name, luckyNo){
+          this.storeNum.push({
+            func:`in function ${this.func}`,
+            name:`${name} in ${this.func}`,
+            LuckyN0:`${luckyNo} in ${this.func}`, 
+        });
+    }
+}
+
+let obj2 ={
+    func:"second",
+    storeNum:[]
+}
+let method = obj1.addElem;
+
+//method("nitendra", 7); --> this will not work (Cannot read properties of undefined (reading 'storeNum'))
+//that is why we use call method
+
+method.call(obj2,"nitendra", 7);
+console.log(obj2.storeNum);
+method.call(obj1,"reu", 9);
+console.log(obj1.storeNum);
+
+/// formate/structure of all the object must be same where we are applying call method
+
+//=> APPLY METHOD  ==> takes this and array as input
+let arr1 = ["nik", 17];
+method.apply(obj1, arr1);
+console.log(obj1);
+// but it is not recommeded to use apply method instead we can use call 
+method.call(obj1, ...arr1);
+console.log(obj1);
+
+//===========Bind Method+++++++++ set the method for new object
+
+let obj2Method = obj1.addElem.bind(obj2);   // we can also use  { method.bind(obj2) }
+
+obj2Method("Rana", 25);                     // enhance redablity.
+
+console.log(obj2.storeNum);
+
+// bind helps us building partial application, for eg
+
+let Name = obj1.addElem.bind(obj2, "Nitendra Rana"); // partial appplication binding
+Name("23"); 
+Name("48");                            // we only need to give remaining input in this function name is fixed 
+console.log(obj2.storeNum);
+
+*/
+
+//=> IMMEDIATLY INVOKED FUNCTIONS  : should be wrapped inside (round breackets): js treat it as an expression
+// to call it simply use () at the end
+/*
+(function(){
+    let str ="immediatly invoked functions"
+    
+    console.log("this is a self invoking function");
+})();
+(()  => {
+    let str ="immediatly invoked functions"
+    
+    console.log("this is a self invoking arrow function");
+})();
+*/
+
+//==============================================CLOSURE====================================================================
+/*
+definations:
+CLOSURE:  (1)a closure is the closed over variable environment of the execution 
+          context in which a function was created even after that execution 
+          context is gone.
+
+          (2)a closure gives a function access to all the variables of its parent 
+          function. So the function in which it is defined even after that parent 
+          function has returned. So the function keeps a reference to its outer 
+          scope even after that outer scope is gone.
+
+          (3) a closure makes sure that a function does never lose connection to the
+            variables that existed at the function's birthplace. It remembers the 
+            variables, even after the birthplace is gone.
+*/
+
+//eg.
+/*
+const func1 = function(){                       //Global execution is created 
+    let count = 0;
+    return function(){
+        count++
+        console.log(`now count is ${count}`)
+    }
+}
+const checkClosure = func1();                  // here func1 is executed and removed from execution context.
+
+checkClosure();                                //we don't have environment for variable but it will take from the closure
+checkClosure();                                // same and updated 
+checkClosure();                                // same and updated 
+
+console.dir(checkClosure);
+
+*/
+//other examples of closures 
+/*
+let f;                              //decleration of variable f
+
+const ClosureEg1= function(){
+    let a =10;
+    f = function(){                 //assignment of var f as function 
+        console.log(`In the environment of ClosureEg1 function value is ${a*2}`);
+    }
+}
+const ClosureEg2= function(){
+    let a =50;
+    f = function(){                 //assignment of var f as function 
+        console.log(`In the environment of ClosureEg2 function value is ${a*2}`);
+    }
+    setTimeout(function(){
+        console.log(`Time will tell your story ${a}`)
+    }, 3000);
+}
+ClosureEg1();   //without calling this function a will never we created so we need to call it first to assign value of f()
+f();            // f() will always remember its environmet where it has assigned value;
+
+ClosureEg2();   //without calling this function a will never we created so we need to call it first to assign value of f()
+f();
+
+*/
+
+
+
