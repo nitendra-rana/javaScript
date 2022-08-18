@@ -30,7 +30,7 @@
 //only diff. b/w regular function and constructor function is, use of new keyword in constructor functions
 //eg.              ...namimng convention: Start with capital letter
 
-/*
+//
 //----------------------------------------------------------------------
 const Constfunct = function() {   //                                    |
      console.log(this);         //  Constfunct {}                       |
@@ -42,11 +42,11 @@ new Constfunct();           //                                          |
 //step3: {}(empty object) is linked to prototype                        |
 //step4: function automatically returns {}(empty object).               |
 //-----------------------------------------------------------------------
-*/
+//
 
 //eg.2 
 
-/*
+//
 const Person = function(fname, lname){      // if we use Arrow function : TypeError:Person is not a constructor
      //instance properties
     this.fname = fname;
@@ -84,13 +84,13 @@ console.log(nitendra.__proto__);            //constructor: ƒ (fname, lname)
 console.dir(nitendra.__proto__.__proto__);  //this is object.protype(top of the prototype chain)            //constructor: ƒ Object()
 console.log(nitendra.__proto__.__proto__.__proto__);    //null
 
-*/
+//
 //Every function is an object so it has its own prototype;
 //prototype exist for reusablity of code
-/*
+//
 let arrO = [1,2,3,4,5,6]
 console.log(arrO.__proto__);
-*/
+//
 // we can add new method to the Array prototype just by using  Array.prototype  <=
 
 ///////////////////////ES6 CLASSES////////////////////
@@ -98,7 +98,7 @@ console.log(arrO.__proto__);
 //In javascript classes are sprcial type of funtions : so we have class expression and class decleration
 // const PersonCl = class { //body }      <=== this is a class expression.
 
-/*
+//
 
 class PersonCl{                           //<=== this is a class decleration
     constructor(fname, birthYear){       // cosntructor must be used exactly smae as here, automatically called whenever we create new instance
@@ -122,13 +122,13 @@ riya.calcAge();
 //Note : 1)classes are not hoisted, functions are. 
 //       2) classes are also first class citizens 
 //       3) classes are exexuted in strict mode
-*/
+//
 
 ////////////gettters and setters////////////
 
 // getter are setters acts as properties not like functions, so we can easily deal with them like other properties.
 //Helpful in Data validation
-/*
+//
 const nums = {
     type: "Number1",
     arr: [1,2,3,4,5,6],
@@ -149,10 +149,10 @@ const nums = {
         return this._type 
     },
     // static method  (other methods will be instance methods)
+    /*
     static calc(){
     console.log("this is static for arr");
-}
-
+    */
 }
 
 console.log(nums.num);
@@ -164,26 +164,26 @@ console.log(nums.__proto__);
 nums.typeCheck = "num"  // number not included   dava validation 
 nums.typeCheck = "num1" // num1
 
-*/
+//
 
 //////////////////Static Methods////////////////
 //Methods which are connected to the constructor are called static methods 
 //eg. 
-/*
+//
 let arr= [1,2,3,4,5,6];
 console.log(Array.from(arr))  // ==> from is a static function
-*/
+//
 
 //but we cant't use it as >>>> below
 //console.log([1,2,3,4,5,6].from(arr))  //TypeError:[1,2,3,4,5,6].from is not a function
 
 // to create static method  either this method or the static keyword as above
-/*
+//
 arr.calc = function(){
     console.log("this is static for arr");
 }
 arr.calc();
-*/  
+//  
 
 
 //third way of creating prototype inheritance or deligation is :
